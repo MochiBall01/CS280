@@ -138,6 +138,7 @@ def dog(imgs, show=None):
 
 
 # finds the local maxima and minima of the image, outputs them as image files
+# Not yet working, will implement for final exploration
 def find_maxima_minima(imgs, show=None):
     # makes each to be the size of the most high resolution image
     maxima = np.zeros(imgs[0][0])
