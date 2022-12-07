@@ -9,11 +9,11 @@
   - [x] Construct a Scale Space
     - [x] Gaussian Blur
     - [x] Difference of Gaussians
-  - [ ] Keypoint Localization
-    - [ ] Local maxima/minima
-    - [ ] Keypoint selection
-  - [ ] Orientation Assignment
-    - [ ] Calculate Magnitude & Orientation
-    - [ ] Create Histogram of Magnitude & Orientation
-  - [ ] Keypoint Descriptor
+  - [x] Keypoint Localization
+    - [x] Local maxima/minima
+    - [x] Keypoint selection
+  - [x] Orientation Assignment
+    - [x] Calculate Magnitude & Orientation
+    - [x] Create Histogram of Magnitude & Orientation
+  - [x] Keypoint Descriptor
   - [ ] Feature Matching
