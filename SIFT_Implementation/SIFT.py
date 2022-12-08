@@ -5,6 +5,8 @@ import numpy as np
 import math
 from skimage import feature
 
+# Article that inspired most of code - https://www.analyticsvidhya.com/blog/2019/10/detailed-guide-powerful-sift-technique-image-matching-python/
+
 # configuring matplotlib
 plt.rcParams['figure.figsize'] = (10.0, 8.0)  # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
@@ -559,8 +561,39 @@ def SIFT(img, show=None):
 
         plt.show()
 
+    return final_keypoints
 
-SIFT(eiffel_1, show=True)
+
+# feature matching, copied from article, incomplete
+def feature_match(keypoints1, keypoints2, descriptors1, descriptors2, img1, img2):
+    bf = cv2.BFMatcher(cv2.NORM_L1, crossCheck=True)
+
+    matches = bf.match(descriptors1, descriptors2)
+    matches = sorted(matches, key=lambda x:x.distance)
+
+    img3 = cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches[:50], img2, flags=2)
+    plt.imshow(img3), plt.show()
+
+
+keypoints1 = SIFT(eiffel_1, show=True)
+keypoints2 = SIFT(eiffel_2, show=True)
+
+# currently keypoints are in form that does not work with brute force matcher, but sift implementation is working as intended
+
+
+# testing on cv2's built in model
+# sift = cv2.xfeatures2d.SIFT_create()
+#
+# keypoints_cv2_1, descriptor_cv2_1 = sift.detectAndCompute(eiffel_1, None)
+# keypoints_cv2_2, descriptor_cv2_2 = sift.detectAndCompute(eiffel_2, None)
+#
+# print("keypoints")
+# print(keypoints1, keypoints2)
+# print(keypoitns_cv2_1, keypoints_cv2_2)
+#
+# print('descriptors')
+# print(orientation1, orientation2)
+# print(descriptor_cv2_1, descriptor_cv2_1)
 
 
 

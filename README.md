@@ -16,4 +16,4 @@
     - [x] Calculate Magnitude & Orientation
     - [x] Create Histogram of Magnitude & Orientation
   - [x] Keypoint Descriptor
-  - [ ] Feature Matching
+  - [ ] Feature Matching - Not finishing yet for this project
