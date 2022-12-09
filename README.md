@@ -5,7 +5,7 @@
 
 ## **Projects**
 
-## <ul><li>- [x] [SIFT Implementation](https://github.com/MochiBall01/CS280/tree/main/SIFT_Implementation) Following [Online Tutorial](https://www.analyticsvidhya.com/blog/2019/10/detailed-guide-powerful-sift-technique-image-matching-python/)
+## <ul><li> [x] [SIFT Implementation](https://github.com/MochiBall01/CS280/tree/main/SIFT_Implementation) Following [Online Tutorial](https://www.analyticsvidhya.com/blog/2019/10/detailed-guide-powerful-sift-technique-image-matching-python/)
   - [x] Construct a Scale Space
     - [x] Gaussian Blur
     - [x] Difference of Gaussians
