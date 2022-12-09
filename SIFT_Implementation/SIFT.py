@@ -5,7 +5,8 @@ import numpy as np
 import math
 from skimage import feature
 
-# Article that inspired most of code - https://www.analyticsvidhya.com/blog/2019/10/detailed-guide-powerful-sift-technique-image-matching-python/
+# Article that inspired most of code -
+# https://www.analyticsvidhya.com/blog/2019/10/detailed-guide-powerful-sift-technique-image-matching-python/
 
 # configuring matplotlib
 plt.rcParams['figure.figsize'] = (10.0, 8.0)  # set default size of plots
@@ -15,22 +16,6 @@ plt.rcParams['image.cmap'] = 'gray'
 # setting images
 eiffel_1 = cv2.imread('eiffel-1.jpg', flags=cv2.IMREAD_GRAYSCALE)
 eiffel_2 = cv2.imread('eiffel-2.jpg', flags=cv2.IMREAD_GRAYSCALE)
-
-
-def display(img, title=None):
-    # Show image
-    plt.figure(figsize=(5, 5))
-    plt.imshow(img)
-    plt.title(title)
-    plt.axis('off')
-    plt.show()
-
-# # testing image displays
-# print('displaying image 1')
-# display(eiffel_1)
-#
-# print('displaying image 2')
-# display(eiffel_2)
 
 
 # creates scale space
@@ -94,9 +79,7 @@ def dog(imgs, show=None):
            3: [0, 0, 0, 0]}
 
     for a in range(4):
-        # print(a)
         for b in range(len(imgs[a]) - 1):
-            # print(b)
             dog1 = imgs[a][b]
             dog2 = imgs[a][b+1]
             new = np.zeros(dog1.shape)
@@ -156,6 +139,7 @@ def find_maxima_minima(imgs, show=None, is_list=None):
     maxima = np.zeros(imgs[0][0].shape)
     minima = np.zeros(imgs[0][0].shape)
 
+    # sets up empty lists
     max_list = []
     min_list = []
 
@@ -340,16 +324,9 @@ def compare_neighbors(img, x, y, img2, x2, y2, img3=None, x3=None, y3=None):
                 all_values.append(img3[x3+1][y3+1])
                 all_values.append(img3[x3][y3+1])
 
-    # print(all_values)
-    # print(img[x][y])
-
     # threshold value
     tmin = 40
     tmax = 45
-
-    # debugging
-    # print("min", min(all_values) - img[x][y])
-    # print("max", img[x][y] - max(all_values))
 
     if (min(all_values) - img[x][y]) > tmin:
         ismin = True
@@ -438,24 +415,8 @@ def calc_orientation(img, keypoint_img):
 
         # creating bins of angle values
         angles = {
-            0: 0,
-            20: 0,
-            40: 0,
-            60: 0,
-            80: 0,
-            100: 0,
-            120: 0,
-            140: 0,
-            160: 0,
-            180: 0,
-            200: 0,
-            220: 0,
-            240: 0,
-            260: 0,
-            280: 0,
-            300: 0,
-            320: 0,
-            340: 0
+            0: 0, 20: 0, 40: 0, 60: 0, 80: 0, 100: 0, 120: 0, 140: 0, 160: 0,
+            180: 0, 200: 0, 220: 0, 240: 0, 260: 0, 280: 0, 300: 0, 320: 0, 340: 0
         }
 
         for a in range(-4, 3):
@@ -463,12 +424,10 @@ def calc_orientation(img, keypoint_img):
             y = (key_list[i][1]+a)
 
             # finding gradients in x and y directions
-
             gx = int(img[x+1][y]) - int(img[x-1][y])
             gy = int(img[x][y+1]) - int(img[x][y-1])
 
             # find magnitude and orientation
-
             magnitude = math.sqrt((gx*gx) + (gy*gy))
 
             # small fix for keypoint with gx of 0
@@ -488,7 +447,7 @@ def calc_orientation(img, keypoint_img):
             angle_bin = (math.floor(orientation / 20)) * 20
             angles[angle_bin] += magnitude
 
-        # finds angle with largest value, assignes keypoint that orientation
+        # finds angle with the largest value, assignes keypoint that orientation
         max_angle = max(angles, key=angles.get)
 
         orientation_list.append(max_angle)
@@ -542,22 +501,13 @@ def SIFT(img, show=None):
 
     # displays keypoints
     if show is True:
-        fig = plt.figure(figsize=(15, 5))
+        fig = plt.figure(figsize=(7, 5))
 
-        fig.add_subplot(1, 2, 1)
+        fig.add_subplot(1, 1, 1)
         img_1 = cv2.drawKeypoints(img, final_keypoints, img)
         plt.imshow(img_1)
         plt.axis('on')
         plt.title('keypoints')
-
-        fig.add_subplot(1, 2, 2)
-        key_img = np.zeros(img.shape)
-        for a in range(len(keypoints)):
-            key_img[keypoints[a][0]][keypoints[a][1]] = 1
-
-        plt.imshow(key_img)
-        plt.axis('on')
-        plt.title('keypoints loc only')
 
         plt.show()
 
@@ -581,7 +531,8 @@ keypoints2 = SIFT(eiffel_2, show=True)
 # currently keypoints are in form that does not work with brute force matcher, but sift implementation is working as intended
 
 
-# testing on cv2's built in model
+# ---------------- testing on cv2's built in model ----------------
+
 # sift = cv2.xfeatures2d.SIFT_create()
 #
 # keypoints_cv2_1, descriptor_cv2_1 = sift.detectAndCompute(eiffel_1, None)
@@ -594,9 +545,3 @@ keypoints2 = SIFT(eiffel_2, show=True)
 # print('descriptors')
 # print(orientation1, orientation2)
 # print(descriptor_cv2_1, descriptor_cv2_1)
-
-
-
-
-
-
